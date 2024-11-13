@@ -1,3 +1,5 @@
+import unittest
+
 class TriviaGameMenu:
     """manages the text-based menu system for the trivia game.
 
@@ -116,5 +118,46 @@ class QuestionDatabase:
 
         Returns:
             list: A list of questions matching the specified criteria.
+        """
+        pass
+
+# Unit Tests
+class TestTriviaGame(unittest.TestCase):
+    def test_ask_question(self):
+        """test if points are awarded correctly based on question difficulty.
+        """
+        pass
+
+    def test_determine_winner(self):
+        """test if the winner is determined correctly based on scores.
+        """
+        pass
+
+
+class TestQuestionDatabase(unittest.TestCase):
+    def test_add_question(self):
+        """test if a question is added correctly to the .csv file.
+        """
+        pass
+
+    def test_delete_question(self):
+        """test if a question is deleted correctly from the .csv file.
+        """
+        pass
+
+    def test_get_questions(self):
+        """test if questions are retrieved correctly based on criteria.
+        """
+        pass
+
+
+class TestTriviaGameMenu(unittest.TestCase):
+    def test_start_game(self):
+        """test if the game starts correctly for the specified number of players.
+        """
+        pass
+
+    def test_view_instructions(self):
+        """test if the instructions are displayed correctly.
         """
         pass

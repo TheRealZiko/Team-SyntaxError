@@ -39,7 +39,7 @@ class TriviaGame:
             print(f"{player} got the answer correct!")
             self.scores[player] += (difficulty * 100)
         else:
-            print(f"{player} got the answer wrong. The correct answer is {correct_answer}.")
+            print(f"{player} is incorrect. The correct answer is {correct_answer}.")
 
     def run_game(self):
         

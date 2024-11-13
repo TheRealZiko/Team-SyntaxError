@@ -1,7 +1,3 @@
-class TriviaGame:
-    "Manages the game itself" 
-
-
 class TriviaGameMenu:
     """manages the text-based menu system for the trivia game.
 
@@ -36,5 +32,36 @@ class TriviaGameMenu:
         
         Side effects:
             Initializes and runs the game session.
+        """
+        pass
+
+class TriviaGame:
+    """handles the gameplay logic for the trivia game.
+
+    Attributes:
+        database (QuestionDatabase): An instance of the QuestionDatabase class for retrieving questions.
+        num_questions (int): The total number of questions for the game session.
+        player_scores (dict): A dictionary storing scores for each player.
+    """
+
+    def __init__(self, database, num_questions):
+        pass
+
+    def ask_question(self, question):
+        """presents a question to the current player and evaluates their answer.
+
+        Args:
+            question (dict): The question data, including text, answers, and difficulty.
+        
+        Returns:
+            int: Points earned for the question based on its difficulty.
+        """
+        pass
+
+    def determine_winner(self):
+        """determines the winner of the game based on player scores.
+
+        Returns:
+            str: A message indicating the winner or if the game is tied.
         """
         pass

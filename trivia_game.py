@@ -1,3 +1,7 @@
+class TriviaGame:
+    "Manages the game itself" 
+
+
 class TriviaGameMenu:
     """manages the text-based menu system for the trivia game.
 

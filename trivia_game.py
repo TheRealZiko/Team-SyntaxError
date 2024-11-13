@@ -65,3 +65,56 @@ class TriviaGame:
             str: A message indicating the winner or if the game is tied.
         """
         pass
+
+class QuestionDatabase:
+    """manages the database of trivia questions stored in .csv files.
+
+    Attributes:
+        db_directory (str): The directory where the .csv files are stored.
+    """
+
+    def __init__(self, db_directory):
+        """initializes the QuestionDatabase with the directory path for .csv files.
+
+        Args:
+            db_directory (str): The directory where the .csv files are stored.
+        """
+        pass
+
+    def add_question(self, question_text, correct_answer, incorrect_answers, difficulty, topic):
+        """adds a new question to the database.
+
+        Args:
+            question_text (str): The text of the question.
+            correct_answer (str): The correct answer for the question.
+            incorrect_answers (list[str]): A list of three incorrect answers.
+            difficulty (str): The difficulty level of the question ('easy', 'medium', 'hard').
+            topic (str): The topic category for the question.
+
+        Side effects:
+            Writes a new question into the appropriate .csv file.
+        """
+        pass
+
+    def delete_question(self, question_id):
+        """deletes a question from the database.
+
+        Args:
+            question_id (int): The unique identifier of the question to delete.
+
+        Side effects:
+            Removes the specified question from the .csv file.
+        """
+        pass
+
+    def get_questions(self, difficulty=None, topic=None):
+        """retrieves questions from the database based on the specified difficulty and/or topic.
+
+        Args:
+            difficulty (str, optional): The difficulty level to filter by.
+            topic (str, optional): The topic category to filter by.
+
+        Returns:
+            list: A list of questions matching the specified criteria.
+        """
+        pass

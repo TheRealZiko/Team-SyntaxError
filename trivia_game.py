@@ -1,41 +1,27 @@
 import unittest
 
 class TriviaGameMenu:
-    """manages the text-based menu system for the trivia game.
 
-    Attributes:
-        database (QuestionDatabase): An instance of the QuestionDatabase class for managing questions.
-    """
-
-    def __init__(self, database):
-        pass
+def __init__(self, database):
+        self.database = database
 
     def display_menu(self):
-        """displays the main menu options to the user.
-        
-        Side effects:
-            Prints the menu options to the console.
-        """
-        pass
+        print("Welcome to Trivia!")
+        print("Please choose an option:")
+        print("1. View Instructions")
+        print("2. Start Game")
+        print("3. Exit")
 
     def view_instructions(self):
-        """displays the game instructions to the user.
-
-        Side effects:
-            Prints the instructions to the console.
-        """
-        pass
+        print("Instructions:")
+        print("1. Answer trivia questions by entering the corresponding letter!")
+        print("2. Each correct answer earns points based on difficulty.")
+        print("3. The player with the highest score wins!")
 
     def start_game(self, num_players):
-        """starts the trivia game for the specified number of players.
-
-        Args:
-            num_players (int): The number of players (1 or 2).
+        self.num_players = num_players 
+        # input more game logic
         
-        Side effects:
-            Initializes and runs the game session.
-        """
-        pass
 
 class TriviaGame:
     """handles the gameplay logic for the trivia game.

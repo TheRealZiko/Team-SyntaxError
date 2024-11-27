@@ -1,8 +1,11 @@
 import unittest
+import os
+import random
+import csv
 
 class TriviaGameMenu:
 
-def __init__(self, database):
+    def __init__(self, database):
         self.database = database
 
     def display_menu(self):
@@ -134,41 +137,123 @@ class QuestionDatabase:
 
 # Unit Tests
 class TestTriviaGame(unittest.TestCase):
+    def setUp(self):
+        """Sets up the test database and game instance."""
+        self.mock_database = QuestionDatabase("test_db")
+        self.game = TriviaGame(self.mock_database, 5)
+
     def test_ask_question(self):
-        """test if points are awarded correctly based on question difficulty.
-        """
-        pass
+        """Test whether or not points are awarded correctly based on the questions difficulty"""
+        question = {
+            "text": "What is 2+2?",
+            "correct_answer": "4",
+            "incorrect_answers": ["3", "5", "6"],
+            "difficulty": "easy",
+        }
+        # Simulate user input by calling the method with predefined answers
+        player_answer = "4"  # Correct answer
+        points = self.game.ask_question(question)
+        self.assertEqual(points, 10)  # Easy question awards 10 points
+
+        player_answer = "3"  # Incorrect answer
+        points = self.game.ask_question(question)
+        self.assertEqual(points, 0)  # No points for an incorrect answer
 
     def test_determine_winner(self):
-        """test if the winner is determined correctly based on scores.
-        """
-        pass
+        """Test if the winner is determined correctly based on scores"""
+        self.game.player_scores = {"Player 1": 30, "Player 2": 20}
+        result = self.game.determine_winner()
+        self.assertEqual(result, "Player 1 wins!")
 
+        self.game.player_scores = {"Player 1": 20, "Player 2": 20}
+        result = self.game.determine_winner()
+        self.assertEqual(result, "It's a tie!")
 
 class TestQuestionDatabase(unittest.TestCase):
+    def setUp(self):
+        """Set up a test database directory"""
+        self.test_db_directory = "test_databases"
+        os.makedirs(self.test_db_directory, exist_ok=True)
+        self.database = QuestionDatabase(self.test_db_directory)
+
+    def tearDown(self):
+        """Clean up the test database directory"""
+        for file in os.listdir(self.test_db_directory):
+            os.remove(os.path.join(self.test_db_directory, file))
+        os.rmdir(self.test_db_directory)
+
     def test_add_question(self):
-        """test if a question is added correctly to the .csv file.
-        """
-        pass
+        """Test if a question is added correctly to the .csv file"""
+        self.database.add_question(
+            "What is the capital of France?",
+            "Paris",
+            ["London", "Rome", "Berlin"],
+            "medium",
+            "Geography",
+        )
+        file_path = os.path.join(self.test_db_directory, "Geography.csv")
+        self.assertTrue(os.path.exists(file_path))
+
+        with open(file_path, "r") as file:
+            lines = file.readlines()
+        self.assertIn("What is the capital of France?,Paris,London|Rome|Berlin,medium\n", lines)
 
     def test_delete_question(self):
-        """test if a question is deleted correctly from the .csv file.
-        """
-        pass
+        """Test if a question is deleted correctly from the .sv file"""
+        self.database.add_question(
+            "What is the capital of Spain?",
+            "Madrid",
+            ["Barcelona", "Seville", "Valencia"],
+            "medium",
+            "Geography",
+        )
+        file_path = os.path.join(self.test_db_directory, "Geography.csv")
+        self.database.delete_question(1)
+        with open(file_path, "r") as file:
+            lines = file.readlines()
+        self.assertEqual(len(lines), 0)
 
     def test_get_questions(self):
-        """test if questions are retrieved correctly based on criteria.
-        """
-        pass
-
+        """Test if questions are retrieved correctly based on criteria"""
+        self.database.add_question(
+            "What is the capital of Italy?",
+            "Rome",
+            ["Milan", "Naples", "Turin"],
+            "hard",
+            "Geography",
+        )
+        questions = self.database.get_questions(difficulty="hard", topic="Geography")
+        self.assertEqual(len(questions), 1)
+        self.assertEqual(questions[0]["correct_answer"], "Rome")
 
 class TestTriviaGameMenu(unittest.TestCase):
+    def setUp(self):
+        """Set up a mock database and menu instance"""
+        self.database = QuestionDatabase("test_databases")
+        os.makedirs("test_databases", exist_ok=True)
+        self.menu = TriviaGameMenu(self.database)
+
+    def tearDown(self):
+        """Clean up the test database directory"""
+        for file in os.listdir("test_databases"):
+            os.remove(os.path.join("test_databases", file))
+        os.rmdir("test_databases")
+
     def test_start_game(self):
-        """test if the game starts correctly for the specified number of players.
-        """
-        pass
+        """Test if the game starts correctly for the specified number of players"""
+        # Simulate the start game functionality by initializing game logic
+        game = self.menu.start_game(1)
+        self.assertIsInstance(game, TriviaGame)
 
     def test_view_instructions(self):
-        """test if the instructions are displayed correctly.
+        """Test if the instructions are displayed correctly"""
+        instructions = self.menu.view_instructions()
+        expected_instructions = """
+        Welcome to the Trivia Game!
+        Instructions:
+        1. Choose a topic and difficulty level.
+        2. Answer questions to earn points.
+        3. The player with the most points wins.
         """
-        pass
+        self.assertEqual(instructions, expected_instructions.strip())
+

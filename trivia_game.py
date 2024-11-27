@@ -19,8 +19,14 @@ def __init__(self, database):
         print("3. The player with the highest score wins!")
 
     def start_game(self, num_players):
-        self.num_players = num_players 
-        # input more game logic
+        num_questions = int(input("Enter the number of questions: "))
+        game = TriviaGame(self.database, num_questions)
+        if num_players == 1:
+            game.play_single_player()
+        elif num_players == 2:
+            game.play_two_player()
+        else:
+            print("Invalid number of players.")
         
 
 class TriviaGame:
@@ -33,7 +39,9 @@ class TriviaGame:
     """
 
     def __init__(self, database, num_questions):
-        pass
+        self.database = database
+        self.num_questions = num_questions
+        self.player_scores = {"Player 1": 0, "Player 2": 0}
 
     def ask_question(self, question):
         """presents a question to the current player and evaluates their answer.
@@ -44,7 +52,19 @@ class TriviaGame:
         Returns:
             int: Points earned for the question based on its difficulty.
         """
-        pass
+        print(f"Question: {question['text']}")
+        options = ["A", "B", "C", "D"]
+        answers = question["incorrect_answers"] + [question["correct_answer"]]
+        random.shuffle(answers)
+
+        for i, option in enumerate(options):
+            print(f"{option}: {answers[i]}")
+
+        answer = input("Enter your answer (A/B/C/D): ").strip().upper()
+        if answers[options.index(answer)] == question["correct_answer"]:
+            difficulty_points = {"easy": 10, "medium": 20, "hard": 30}
+            return difficulty_points[question["difficulty"]]
+        return 0
 
     def determine_winner(self):
         """determines the winner of the game based on player scores.
@@ -52,7 +72,12 @@ class TriviaGame:
         Returns:
             str: A message indicating the winner or if the game is tied.
         """
-        pass
+        scores = self.player_scores
+        if scores["Player 1"] > scores["Player 2"]:
+            return "Player 1 wins!"
+        elif scores["Player 1"] < scores["Player 2"]:
+            return "Player 2 wins!"
+        return "It's a tie!"
 
 class QuestionDatabase:
     """manages the database of trivia questions stored in .csv files.

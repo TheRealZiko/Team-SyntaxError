@@ -3,6 +3,38 @@ import os
 import random
 import csv
 
+class QuestionDatabase:
+
+    def __init__(self, csv_file_path):
+        """""
+        Args:
+            csv_file_path (str): Serves as a path to the CSV file that contains the trivia questions.
+        """
+        self.csv_file_path = csv_file_path
+        self.questions = []
+        self.load_questions()
+
+    def load_questions(self):
+        """Loads in the trivia questions from the csv file"""
+        with open(self.csv_file_path, mode="r", encoding="utf-8") as file:
+            reader = csv.DictReader(file)
+            for row in reader:
+                self.questions.append({
+                    "text": row["Question"],
+                    "correct_answer": row["Correct Answer"],
+                    "incorrect_answers": [row["Option A"], row["Option B"], row["Option C"]],
+                })
+
+    def get_random_question(self):
+        """Returns a single random question and removes it from the pool.
+
+        Returns:
+            dict: A randomly selected question.
+        """
+        if self.questions:
+            return self.questions.pop(random.randint(0, len(self.questions) - 1))
+        return None
+
 class TriviaGameMenu:
 
     def __init__(self, database):
@@ -256,4 +288,8 @@ class TestTriviaGameMenu(unittest.TestCase):
         3. The player with the most points wins.
         """
         self.assertEqual(instructions, expected_instructions.strip())
-
+        
+    if __name__ == "__main__":
+        database = QuestionDatabase("Trivia Questions - Questions.csv")
+        menu = TriviaGameMenu(database)
+        menu.display_menu()

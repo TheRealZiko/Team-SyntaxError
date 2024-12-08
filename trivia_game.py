@@ -3,7 +3,7 @@ import os
 import random
 import csv
 
-class QuestionDatabase:
+class Question:
 
     def __init__(self, csv_file_path):
         """""
@@ -206,7 +206,7 @@ class TestQuestionDatabase(unittest.TestCase):
         """Set up a test database directory"""
         self.test_db_directory = "test_databases"
         os.makedirs(self.test_db_directory, exist_ok=True)
-        self.database = QuestionDatabase(self.test_db_directory)
+        self.database = Question(self.test_db_directory)
 
     def tearDown(self):
         """Clean up the test database directory"""
@@ -290,6 +290,6 @@ class TestTriviaGameMenu(unittest.TestCase):
         self.assertEqual(instructions, expected_instructions.strip())
         
     if __name__ == "__main__":
-        database = QuestionDatabase("Trivia Questions - Questions.csv")
+        database = Question("Trivia Questions - Questions.csv")
         menu = TriviaGameMenu(database)
         menu.display_menu()

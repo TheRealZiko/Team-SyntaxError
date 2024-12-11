@@ -1,6 +1,14 @@
-Question,Correct Answer,Option A,Option B,Option C
-Which planet is known as the Red Planet?,Mars,Earth,Jupiter,Venus
-In what year did the Titanic sink?,1912,1905,1920,1918
-What is the hardest natural substance on Earth?,Diamond,Gold,Silver,Platinum
-Who wrote the play 'Hamlet'?,William Shakespeare,Oscar Wilde,Mark Twain,Jane Austen
-What is the largest mammal in the world?,Blue Whale,Elephant,Shark,Giraffe
+Question	Correct Answer	Wrong Answer 1	Wrong Answer 2	Wrong Answer 3	Difficulty
+What is the capital city of France?	Paris	London	Berlin	Rome	Easy
+Which planet is known as the Red Planet?	Mars	Venus	Jupiter	Saturn	Easy
+Who wrote the play 'Romeo and Juliet'?	William Shakespeare	Charles Dickens	Jane Austen	Mark Twain	Medium
+What is the largest mammal in the world?	Blue Whale	Elephant	Giraffe	Orca	Easy
+In what year did the Titanic sink?	1912	1905	1920	1898	Medium
+What is the chemical symbol for gold?	Au	Ag	Fe	Cu	Medium
+Who painted the Mona Lisa?	Leonardo da Vinci	Vincent van Gogh	Pablo Picasso	Claude Monet	Medium
+What is the smallest country in the world?	Vatican City	Monaco	San Marino	Liechtenstein	Hard
+Which language has the most native speakers worldwide?	Mandarin Chinese	English	Spanish	Hindi	Hard
+What is the hardest natural substance on Earth?	Diamond	Steel	Quartz	Graphite	Medium
+In what sport would you perform a slam dunk?	Basketball	Football	Swimming	Boxing	Easy
+Who wrote the novel “1984”	George Orwell	Stephen King	Tom Wolfe	Pat Conroy	Medium
+In Greek mythology, who was condemned to push a boulder	Sisyphus	Zeus	Apollo	Artemis	Hard

@@ -18,7 +18,7 @@ class Question:
             raise FileNotFoundError(f"{self.csv_file_path} does not exist.")
         
         df = pd.read_csv(self.csv_file_path)
-        if not {"Question", "Correct Answer", "Option A", "Option B", "Option C"}.issubset(df.columns):
+        if not {"Question", "Correct Answer", "Option A", "Option B", "Option C","Difficulty"}.issubset(df.columns):
             raise ValueError("CSV file is missing required columns.")
         
         questions = []

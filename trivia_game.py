@@ -151,23 +151,24 @@ class TriviaGameMenu:
             print("Invalid number of players. Returning to menu.")
 
 class QuestionDataBase:
-    db = Question()
-    db.add_question("What is the capital of France?", "Paris")
-    db.add_question("What is the highest mountain in the world?", "Mount Everest")
-
+    def __init__(self):
+        self.db = Question("questions.csv")
+    def add_question(self, question_text, correct_answer, incorrect_answers, difficulty):
+        self.db.add_question(question_text, correct_answer, incorrect_answers, difficulty)
+    def get_answer(self, question_text):
+        return self.db.get_answer(question_text)
+    def list_all_questions(self):
+        return self.db.list_all_questions()
+    def remove_question(self, question_text):
+        self.db.remove_question(question_text)
+if __name__ == "__main__":
+    db = QuestionDataBase()
+    db.load_questions("What is the capital of France?", "Paris", ["London", "Rome", "Berlin"], "Easy")
+    db.load_questions("What is the highest mountain in the world?", "Mount Everest", ["K2", "Kangchenjunga", "Lhotse"], "Hard")
     answer = db.get_answer("What is the capital of France?")
     print(answer)  
-
     questions = db.list_all_questions()
     print(questions) 
-    
     db.remove_question("What is the capital of France?")
     answer = db.get_answer("What is the capital of France?")
-    print(answer)  
-
-
-if __name__ == "__main__":
-    csv_path = "questions.csv"  # Update with your CSV file path
-    question_bank = Question(csv_path)
-    menu = TriviaGameMenu(question_bank)
-    menu.display_menu()
+    print(answer)

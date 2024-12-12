@@ -27,6 +27,7 @@ class Question:
                 "text": row["Question"],
                 "correct_answer": row["Correct Answer"],
                 "incorrect_answers": [row["Option A"], row["Option B"], row["Option C"]],
+                "Difficulty": row["Difficulty"]
             })
         return questions
 
@@ -60,7 +61,13 @@ class TriviaGame:
         answer = input(f"{player}, enter your answer (A/B/C/D): ").strip().upper() if player else input("Enter your answer (A/B/C/D): ").strip().upper()
         if answers[options.index(answer)] == question["correct_answer"]:
             print("Correct!\n")
-            return 1
+            difficulty_points = {
+                "Easy": 10,
+                "Medium": 20,
+                "Hard": 30,
+            }
+            return difficulty_points.get(question.get("Difficulty"), 10)  # Default to 10 points if difficulty is missing
+            
         else:
             print(f"Wrong! The correct answer was: {question['correct_answer']}\n")
             return 0
@@ -144,19 +151,19 @@ class TriviaGameMenu:
             print("Invalid number of players. Returning to menu.")
 
 class QuestionDataBase:
-db = QuestionDataBase()
-db.add_question("What is the capital of France?", "Paris")
-db.add_question("What is the highest mountain in the world?", "Mount Everest")
+    db = QuestionDataBase()
+    db.add_question("What is the capital of France?", "Paris")
+    db.add_question("What is the highest mountain in the world?", "Mount Everest")
 
-answer = db.get_answer("What is the capital of France?")
-print(answer)  
+    answer = db.get_answer("What is the capital of France?")
+    print(answer)  
 
-questions = db.list_all_questions()
-print(questions) 
-
-db.remove_question("What is the capital of France?")
-answer = db.get_answer("What is the capital of France?")
-print(answer)  
+    questions = db.list_all_questions()
+    print(questions) 
+    
+    db.remove_question("What is the capital of France?")
+    answer = db.get_answer("What is the capital of France?")
+    print(answer)  
 
 
 if __name__ == "__main__":

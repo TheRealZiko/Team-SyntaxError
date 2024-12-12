@@ -151,7 +151,7 @@ class TriviaGameMenu:
             print("Invalid number of players. Returning to menu.")
 
 class QuestionDataBase:
-    db = QuestionDataBase()
+    db = Question()
     db.add_question("What is the capital of France?", "Paris")
     db.add_question("What is the highest mountain in the world?", "Mount Everest")
 

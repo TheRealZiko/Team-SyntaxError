@@ -172,3 +172,34 @@ if __name__ == "__main__":
     db.remove_question("What is the capital of France?")
     answer = db.get_answer("What is the capital of France?")
     print(answer)
+    #Unit Tests
+
+class TestQuestion(unittest.TestCase):
+    def test_load_questions(self):
+        question_data = Question("test_questions.csv")
+        self.assertTrue(len(question_data.questions) > 0)
+
+
+class TestTriviaGame(unittest.TestCase):
+    def test_single_player_game(self):
+        game = TriviaGame(Question("test_questions.csv"), num_questions=1) 
+        game.play_single_player()
+        self.assertTrue(True) 
+
+    def test_two_player_game(self):
+        game = TriviaGame(Question("test_questions.csv"), num_questions=1) 
+        game.play_two_player()
+        self.assertTrue(True) 
+
+
+
+class TestTriviaGameMenu(unittest.TestCase):
+    def test_view_instructions(self):
+        menu = TriviaGameMenu(Question("test_questions.csv")) 
+        with unittest.mock.patch('sys.stdout', new=unittest.mock.StringIO()) as fake_out:
+            menu.view_instructions()
+            self.assertIn("Instructions:", fake_out.getvalue())
+
+
+if __name__ == '__main__':
+    unittest.main()
